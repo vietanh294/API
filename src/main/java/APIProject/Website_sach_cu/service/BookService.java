@@ -20,14 +20,14 @@ public class BookService {
 
     public BookResponse getBookByCategoryID(Integer cateID, String ascdesc, String orderBy) {
         BookResponse bookResponse =new BookResponse();
-        if ( !ascdesc.equals("ASC") || !ascdesc.equals("DESC")){
+        if ( !ascdesc.equals("ASC") && !ascdesc.equals("DESC")){
             bookResponse.setCode(-1);
             bookResponse.setMessage("Order value is not valid");
             return bookResponse;
         }
 
         List<BookEntity> bookData =null;
-        String sql = "SELECT * FROM book WHERE category_id = "+cateID +" ORDER BY "+orderBy" "+ascdesc+";";
+        String sql = "SELECT * FROM book WHERE category_id = "+cateID +" ORDER BY "+orderBy+" "+ascdesc+";";
         try {
             Statement statement =connection.createStatement();
             ResultSet resultSet =statement.executeQuery(sql);
@@ -35,9 +35,9 @@ public class BookService {
                 if (bookData == null){
                     bookData =new ArrayList<>();
                 }
-                String title =resultSet.getString("title");
-                String author =resultSet.getString("author");
-                String year =resultSet.getString("year");
+                String title =resultSet.getString("book_name");
+                String author =resultSet.getString("book_author");
+                String year =resultSet.getString("book_year");
                 BookEntity item = new BookEntity(title,author,year);
                 bookData.add(item);
             }
