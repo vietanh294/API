@@ -20,9 +20,9 @@ public class LoginService {
 
     public String loginForm(PersonForm personForm) throws SQLException {
         // Check phone
-        if ( personForm.getUserPhone() == null || personForm.getUserPhone() == "" || personForm.getUserPhone().length() != 10){
-            return "Số điện thoại không hợp lệ!" ;
-        }
+//        if ( personForm.getUserPhone() == null || personForm.getUserPhone() == "" || personForm.getUserPhone().length() != 10){
+//            return "Số điện thoại không hợp lệ!" ;
+//        }
 //        //Check email
 //        if (StringUtils.isEmpty(personForm.getUserEmail()) || !personForm.getUserEmail().contains("@gmail.com")){
 //            messageService ="Email không chính xác";
@@ -42,7 +42,7 @@ public class LoginService {
         //Check Login Page
 
         String sql = "SELECT user_password FROM user WHERE user_phone = '"
-                + personForm.getUserPhone()+"';";
+                + personForm.getUserPhone()+"' or user_email='"+personForm.getUserPhone()+"';";
         Statement statement = connection.createStatement();
         ResultSet resultSetLogin = statement.executeQuery(sql);
         while (resultSetLogin.next()){
