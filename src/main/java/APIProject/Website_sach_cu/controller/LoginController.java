@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.SQLException;
 
@@ -17,12 +18,18 @@ public class LoginController {
     LoginService loginService;
 
     @GetMapping(value = "/login")
-    public String loginPage(Model modelLogin ,
-                            @ModelAttribute("personForm") PersonForm requestLogin) throws SQLException{
-        String runLoginRequest = loginService.loginForm(requestLogin);
-        modelLogin.addAttribute("messageLogin" , runLoginRequest);
+    public String loginPage(Model modelLogin ){
+        PersonForm personFormLogin =new PersonForm();
+        modelLogin.addAttribute("personForm",personFormLogin);
         return "login";
+    }
 
+    @PostMapping (value = "/login")
+    public String loginPage(Model modelLogin ,
+                            @ModelAttribute("personForm") PersonForm requestLogin2) throws SQLException{
+        String runLoginRequest = loginService.loginForm(requestLogin2);
+        modelLogin.addAttribute("messageLogin" , runLoginRequest);
 
+        return "login";
     }
 }

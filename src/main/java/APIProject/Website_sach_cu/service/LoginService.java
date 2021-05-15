@@ -19,10 +19,10 @@ public class LoginService {
     public String messageServiceLogin = null;
 
     public String loginForm(PersonForm personForm) throws SQLException {
-        // Check phone
-//        if ( personForm.getUserPhone() == null || personForm.getUserPhone() == "" || personForm.getUserPhone().length() != 10){
-//            return "Số điện thoại không hợp lệ!" ;
-//        }
+//         Check phone
+        if ( personForm.getUserPhone() == null || personForm.getUserPhone() == "" ){
+            return "Tài khoản không hợp lệ!" ;
+        }
 //        //Check email
 //        if (StringUtils.isEmpty(personForm.getUserEmail()) || !personForm.getUserEmail().contains("@gmail.com")){
 //            messageService ="Email không chính xác";
